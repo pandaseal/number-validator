@@ -1,43 +1,37 @@
-import java.util.Arrays;
-
 public class IsCorrectControlDigit {
 
     public static Boolean isCorrectControlDigit(String inNumber) {
 
         int[] numberAsArray = getNumberAsArray(inNumber);
-        /**if (iArr.length != 10) {
-            return false;
-        }**/
-
-        int[] digitsOfInterest = new int [numberAsArray.length-1];
-        for (int i = 0; i < digitsOfInterest.length; i++) {
-            digitsOfInterest[i] = numberAsArray[i];
+        int[] tenDigitPN = new int [10];
+        if (numberAsArray.length != 10) {
+            if (numberAsArray.length == 12) {
+                for (int i = 0; i < tenDigitPN.length; i++) {
+                    tenDigitPN[i] = numberAsArray[i+2];
+                }
+            } else {
+                throw new IllegalArgumentException("Wrong input length");
+            }
+        } else {
+            tenDigitPN = numberAsArray;
         }
-        int inControlDigit = numberAsArray[numberAsArray.length-1];
-        int calculatedControlDigit = lughnsAlgorithm(digitsOfInterest);
+        
+        // Luhns Algorithm
+        int inControlDigit = tenDigitPN[tenDigitPN.length-1];
+        
+        int[] multiplier = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+        int[] product = new int [multiplier.length];
+        for (int i = 0; i < product.length; i++) {
+            product[i] = tenDigitPN[i]*multiplier[i];
+        }
+        int sumOfDigits = sumOfDigits(product);
+        int calculatedControlDigit = ((10-(sumOfDigits % 10)) % 10);
 
         if (inControlDigit == calculatedControlDigit) {
             return true;
         }
 
         return false;
-    }  
-
-    public static int lughnsAlgorithm(int[] digitsOfInterest) {
-
-        if (digitsOfInterest.length != 9) {
-            throw new IllegalArgumentException("Wrong length for Luhns Algorithm!");
-        }
-
-        int[] multiplier = {2, 1, 2, 1, 2, 1, 2, 1, 2};
-        int[] product = new int [multiplier.length];
-        for (int i = 0; i < product.length; i++) {
-            product[i] = digitsOfInterest[i]*multiplier[i];
-        }
-        int sumOfDigits = sumOfDigits(product);
-        int calculatedControlDigit = ((10-(sumOfDigits % 10)) % 10);
-
-        return calculatedControlDigit;
     }
 
     public static int sumOfDigits(int[] iArr) {
@@ -66,10 +60,12 @@ public class IsCorrectControlDigit {
 
     public static void main(String[] args) {
 
-        //System.out.println(Arrays.toString(getNumberAsArray("201701102384")));
         System.out.println(isCorrectControlDigit("201701102384")); // true
+        System.out.println(isCorrectControlDigit("201701272394")); // incorrect PN
+        System.out.println(isCorrectControlDigit("190302299813")); // incorrect PN
+        //System.out.println(isCorrectControlDigit("19030229981a")); // not just digits
+        //System.out.println(isCorrectControlDigit("19030229981")); // wrong length => exception
 
-        //System.out.println(Integer.toString(lughnsAlgorithm(getNumberAsArray("811218987"))));
     }
 
 
