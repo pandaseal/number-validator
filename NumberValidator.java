@@ -17,7 +17,6 @@ public class NumberValidator {
      * @return true if correct shape, else false
      */
     public static Boolean isCorrectShape(String inNumber) {
-        // TODO perhaps YYYYMMDD+XXXX isn't a correct shape.. check it out
         final String regex = "^\\d{6}(?:\\d{2})?[[+][-]]?\\d{4}$";
         final String string = inNumber;
         
@@ -29,6 +28,47 @@ public class NumberValidator {
             return true;
         }    
         return false;
+    }
+
+    public static Boolean isCorrectUseOfPlus(String inNumber) {
+        if (!isCorrectShape(inNumber)) {
+            throw new IllegalArgumentException("Cannot check usage of plus, shape is wrong.");
+        }
+
+        if (hasPlusAnd8digits(inNumber)) {
+            return isHundredPlus(inNumber);
+        }
+        return true; // no plus => cannot use wrong
+    }
+
+    public static Boolean hasPlusAnd8digits(String inNumber) {
+        final String regex = "^\\d{8}[+]";
+        final String string = inNumber;
+        
+        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        final Matcher matcher = pattern.matcher(string);
+
+        boolean matchFound = matcher.find();
+        return matchFound;
+    }
+
+    public static Boolean isHundredPlus(String inNumber) {
+
+        String[] sArr = inNumber.split("[+]");
+        String dateOfBirth = sArr[0];
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -100); 
+        Date hundredYearsAgo = cal.getTime();
+
+        try {
+            Date DOB = dateFormat.parse(dateOfBirth);
+            Boolean isHundredYears = hundredYearsAgo.after(DOB);
+            return isHundredYears;
+        } catch (ParseException pe) { // "Unparseable date"
+            throw new IllegalArgumentException("Cannot check age, date of birth does not exist.");
+        }
     }
 
     public static Boolean isValidDate(String inNumber) {
@@ -165,15 +205,27 @@ public class NumberValidator {
 
     public static void main(String[] args) {
 
+        
+        // System.out.println(containsPlusAnd8digits("18900118+9811")); // true
+        // System.out.println(containsPlusAnd8digits("19900118+9811")); // true
+        // System.out.println(containsPlusAnd8digits("900118+9811")); // false
+        // System.out.println(containsPlusAnd8digits("201701102384")); // false
+        
+        System.out.println(isCorrectUseOfPlus("900118+9811")); // true
+        System.out.println(isCorrectUseOfPlus("18900118+9811")); // true
+        System.out.println(isCorrectUseOfPlus("19900118+9811")); // false
+
+        /* 
         System.out.println(isCorrectControlDigit("201701102384")); // true
         System.out.println(isCorrectControlDigit("141206-2380")); // true
         System.out.println(isCorrectControlDigit("20080903-2386")); // true
         System.out.println(isCorrectControlDigit("7101169295")); // true
         System.out.println(isCorrectControlDigit("198107249289")); // true
-
+        
         System.out.println(isCorrectControlDigit("201701272394")); // incorrect PN
         System.out.println(isCorrectControlDigit("190302299813")); // incorrect PN (wrong date)
         System.out.println(isValidDate("190302299813")); // false
+        */
 
         //System.out.println(isCorrectControlDigit("19030229981a")); // not just digits
         //System.out.println(isCorrectControlDigit("19030229981")); // wrong length => exception
