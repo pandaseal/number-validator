@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -6,13 +10,14 @@ public class NumberValidator {
     /**
      * Checks if inNumber has the correct shape,
      * that is any of the following shapes:
-     * YYYYMMDD-XXXX (13) YYYYMMDDXXXX (12) or YYMMDDDXXXX (10) or 
-     * YYMMDD+XXXX (11) or YYMMDD-XXXX (11),
+     * YYYYMMDD-XXXX (8+4) YYYYMMDDXXXX (8+4) or YYMMDDDXXXX (6+4) or 
+     * YYMMDD+XXXX (6+4) or YYMMDD-XXXX (6+4),
      * where Y,M,D,X are digits and the divider is '+' or '-' if any
      * @param inNumber personal number as String
      * @return true if correct shape, else false
      */
     public static Boolean isCorrectShape(String inNumber) {
+        // TODO perhaps YYYYMMDD+XXXX isn't a correct shape.. check it out
         final String regex = "^\\d{6}(?:\\d{2})?[[+][-]]?\\d{4}$";
         final String string = inNumber;
         
@@ -26,16 +31,65 @@ public class NumberValidator {
         return false;
     }
 
-    public static Boolean isCorrectNumberOfDigits(String inNumber) {
-        int digits = 0;
+    public static Boolean isValidDate(String inNumber) {
+        if (!isCorrectShape(inNumber)) {
+            throw new IllegalArgumentException("Cannot check date, shape is wrong.");
+        }
+
+        int numDigits = numberOfDigits(inNumber);
+        if (numDigits == 10) { 
+            String shortDate = inNumber.substring(0, 6);
+            String sign = inNumber.substring(6, 7);
+
+            if (sign == "+") {
+                return shortDateExists(shortDate, true);
+            } else {
+                return shortDateExists(shortDate, false);
+            } 
+        } else if (numDigits == 12) {
+            String longDate = inNumber.substring(0, 8);
+            return longDateExists(longDate);
+        } else {
+            throw new IllegalArgumentException("Cannot check date, incorrect number of digits.");
+        }
+    }
+
+    public static Boolean longDateExists(String longDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        dateFormat.setLenient(false); // false = no room for interpretation
+        try {
+            dateFormat.parse(longDate);
+        } catch (ParseException pe) { // "Unparseable date"
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean shortDateExists(String shortDate, Boolean hundredPlus) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+        dateFormat.setLenient(false); // false = no room for interpretation
+
+        if (hundredPlus) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.YEAR, -200); // 100 year period that ends 100 years ago => starts 200 years ago
+            Date hundredYearsAgo = cal.getTime();
+            dateFormat.set2DigitYearStart(hundredYearsAgo);
+        }
+        try {
+            dateFormat.parse(shortDate);
+        } catch (ParseException pe) { // "Unparseable date"
+            return false;
+        }
+        return true;
+    }
+
+    public static int numberOfDigits(String inNumber) {
+        int numDigits = 0;
         for (int i = 0; i < inNumber.length(); i++) {
             if (Character.isDigit(inNumber.charAt(i)))
-                digits++;
+                numDigits++;
         }
-        if (digits == 10 || digits == 12) {
-            return true;
-        }
-        return false;
+        return numDigits;
     }
 
     public static Boolean isCorrectLength(String inNumber) {
@@ -56,6 +110,17 @@ public class NumberValidator {
     }
 
     public static void main(String[] args) {
+
+        System.out.println(isValidDate("201701102384")); // true
+        System.out.println(isValidDate("141206-2380")); // true
+        System.out.println(isValidDate("900118+9811")); // true
+        System.out.println(isValidDate("190302299813")); // false
+        
+        //System.out.println(shortDateExists("141206", false)); // true
+        //System.out.println(shortDateExists("900118", true)); // true
+        
+
+        /*
         //true
         System.out.println(isCorrectShape("201701102384"));       
         System.out.println(isCorrectShape("141206-2380"));         
@@ -67,6 +132,7 @@ public class NumberValidator {
         System.out.println(isCorrectShape("141206-238"));       
         System.out.println(isCorrectShape("2008090-2386"));       
         System.out.println(isCorrectShape("710116929"));       
-        System.out.println(isCorrectShape("900118+981"));       
+        System.out.println(isCorrectShape("900118+981"));  
+        */     
     }
 }
