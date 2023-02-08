@@ -6,9 +6,10 @@ public class Personnummer extends Nummer {
     public boolean isHundredPlus;
 
     public Personnummer(String inNumber) {
+        this.shapeRegex = "^\\d{6}(?:\\d{2})?[[+][-]]?\\d{4}$";
         this.stringForm = inNumber;
         this.validityChecks = new ArrayList<ValidityCheck>();
         this.validityChecks.add(new ShapeCheck());
-        this.shapeRegex = "^\\d{6}(?:\\d{2})?[[+][-]]?\\d{4}$";
+        this.validityChecks.add(new ControlDigitCheck());
     }
 }
