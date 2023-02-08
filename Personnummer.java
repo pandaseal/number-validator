@@ -11,5 +11,6 @@ public class Personnummer extends Nummer {
         this.validityChecks = new ArrayList<ValidityCheck>();
         this.validityChecks.add(new ShapeCheck());
         this.validityChecks.add(new ControlDigitCheck());
+        this.validityChecks.add(new ValidDateCheck());
     }
 }
