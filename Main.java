@@ -16,8 +16,9 @@ public class Main {
         for (ValidityCheck check : nummer.validityChecks) {
             if (!check.passCheck(nummer)) {
                 isValid = false;
+                System.out.println(check.getFailMessage());
             } else {
-                System.out.println(check.passMessage);
+                System.out.println(check.getPassMessage());
             }
         }
         System.out.println(isValid);

@@ -2,9 +2,17 @@ public class ControlDigitCheck extends ValidityCheck {
     private static int[] multiplier = {2, 1, 2, 1, 2, 1, 2, 1, 2};
 
     public ControlDigitCheck() {
-        this.failMessage = "ControlDigitCheck: incorrect shape or invalid control digit.";
-        this.passMessage = "ControlDigitCheck passed.";
         this.nameOfCheck = "ControlDigitCheck";
+    }
+
+    @Override
+    public String getFailMessage() {
+        return this.nameOfCheck + ": " + this.failMessage;
+    }
+
+    @Override
+    public String getPassMessage() {
+        return this.nameOfCheck + ": " + this.passMessage;
     }
 
     @Override
@@ -12,11 +20,12 @@ public class ControlDigitCheck extends ValidityCheck {
         return isCorrectControlDigit(nummer);
     }
 
-    public static Boolean isCorrectControlDigit(Nummer nummer) {
+    public Boolean isCorrectControlDigit(Nummer nummer) {
         if (nummer.hasCorrectShape == null) {
             nummer.hasCorrectShape = ShapeCheck.isCorrectShape(nummer);
         }
         if (!nummer.hasCorrectShape) {
+            this.failMessage = "Wrong shape, cannot check date.";
             return false;
         }
 

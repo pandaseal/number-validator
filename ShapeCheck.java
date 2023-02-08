@@ -4,9 +4,8 @@ import java.util.regex.Pattern;
 public class ShapeCheck extends ValidityCheck {
 
     public ShapeCheck() {
-        this.failMessage = "ShapeCheck: Number has wrong shape.";
-        this.passMessage = "ShapeCheck passed.";
         this.nameOfCheck = "ShapeCheck";
+        this.failMessage = "Incorrect shape";
     }
 
     @Override
@@ -14,6 +13,16 @@ public class ShapeCheck extends ValidityCheck {
         boolean result = isCorrectShape(nummer);
         nummer.hasCorrectShape = result;
         return result;
+    }
+
+    @Override
+    public String getFailMessage() {
+        return this.nameOfCheck + ": " + this.failMessage;
+    }
+
+    @Override
+    public String getPassMessage() {
+        return this.nameOfCheck + ": " + this.passMessage;
     }
 
     /**
