@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
 
         Nummer nummer = new Personnummer("900118+9811");
-        System.out.println("Checking personal number: " + nummer.stringForm);
+        System.out.println("Checking personnummer: " + nummer.stringForm);
 
         // nummer.checkValidity();
         // if (nummer.isValid) {
@@ -21,6 +21,6 @@ public class Main {
                 System.out.println(check.getPassMessage());
             }
         }
-        System.out.println(isValid);
+        System.out.println(nummer.stringForm + " isValid: " + isValid);
     }
 }
