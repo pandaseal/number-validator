@@ -5,12 +5,15 @@ public class ShapeCheck extends ValidityCheck {
 
     public ShapeCheck() {
         this.failMessage = "ShapeCheck: Number has wrong shape.";
+        this.passMessage = "ShapeCheck passed.";
+        this.nameOfCheck = "ShapeCheck";
     }
 
     @Override
-    public void doCheck(Nummer nummer) {
-        this.pass = isCorrectShape(nummer.stringForm, nummer.shapeRegex);
-        nummer.hasCorrectShape = this.pass;
+    public boolean passCheck(Nummer nummer) {
+        boolean result = isCorrectShape(nummer);
+        nummer.hasCorrectShape = result;
+        return result;
     }
 
     /**
@@ -22,7 +25,9 @@ public class ShapeCheck extends ValidityCheck {
      * @param inNumber number as String
      * @return true if correct shape, else false
      */
-    public static Boolean isCorrectShape(final String string, final String regex) {
+    public static boolean isCorrectShape(Nummer nummer) {
+        final String string = nummer.stringForm;
+        final String regex = nummer.shapeRegex;
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(string);
 
