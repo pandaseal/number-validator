@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
 public abstract class Nummer {
-    public boolean isValid;
+    public Boolean isValid;
     public String stringForm;
-    public String inNumber;
     public String shortForm;
     public int numDigits;
-    public boolean hasCorrectShape;
+    public Boolean hasCorrectShape;
     public String shapeRegex;
     public ArrayList<ValidityCheck> validityChecks;
 }

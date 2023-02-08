@@ -13,6 +13,9 @@ public class ControlDigitCheck extends ValidityCheck {
     }
 
     public static Boolean isCorrectControlDigit(Nummer nummer) {
+        if (nummer.hasCorrectShape == null) {
+            nummer.hasCorrectShape = ShapeCheck.isCorrectShape(nummer);
+        }
         if (!nummer.hasCorrectShape) {
             return false;
         }
