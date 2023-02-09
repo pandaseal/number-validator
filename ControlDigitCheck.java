@@ -15,7 +15,7 @@ public class ControlDigitCheck extends ValidityCheck {
             nummer.hasCorrectShape = ShapeCheck.isCorrectShape(nummer);
         }
         if (!nummer.hasCorrectShape) {
-            this.failMessage = "Wrong shape, cannot check date.";
+            this.failMessage = "Wrong shape, cannot check control digit.";
             return false;
         }
 
