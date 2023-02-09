@@ -19,11 +19,8 @@ public class ControlDigitCheck extends ValidityCheck {
             return false;
         }
 
-        if (nummer.shortForm == null) {
-            nummer.shortForm = getShortForm(nummer);
-        }
-
-        int[] tenDigitPN = getNumberAsArray(nummer.shortForm);
+        String shortForm = getShortForm(nummer);
+        int[] tenDigitPN = getNumberAsArray(shortForm);
         
         // Luhns Algorithm
         int inControlDigit = tenDigitPN[tenDigitPN.length-1];
