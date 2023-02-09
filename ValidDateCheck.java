@@ -27,8 +27,15 @@ public class ValidDateCheck extends ValidityCheck {
         }
 
         if (nummer.numDigits == 10) {
-            String shortDate = nummer.stringForm.substring(0, 6);
+            String shortDate;
             String sign = nummer.stringForm.substring(6, 7);
+
+            if (nummer.numberType.equals("samordningsnummer")) {
+                shortDate = getRealDate(nummer.stringForm, true);
+
+            } else {
+                shortDate = nummer.stringForm.substring(0, 6);
+            }
 
             if (sign == "+") {
                 return shortDateExists(shortDate, true);
@@ -36,12 +43,36 @@ public class ValidDateCheck extends ValidityCheck {
                 return shortDateExists(shortDate, false);
             } 
         } else if (nummer.numDigits == 12) {
-            String longDate = nummer.stringForm.substring(0, 8);
+            String longDate;
+            if (nummer.numberType == "samordningsnummer") {
+                longDate = getRealDate(nummer.stringForm, false);
+            } else {
+                longDate = nummer.stringForm.substring(0, 8);
+            }
             return longDateExists(longDate);
         } else {
             this.failMessage = "Wrong shape, cannot check date.";
             return false;        
         }
+    }
+
+    /**
+     * Method used to get the real date of birth from a samordningsnummer
+     * Subtracts 60 from the digits representing the date (day of month).
+     * @param stringForm of a samordningsnummer
+     * @param shortForm true if number has 10 digits, false if 12 digits
+     * @return the real DOB of a person with a samordningsnummer
+     */
+    public static String getRealDate(String stringForm, boolean shortForm) {
+        int beginIndex = 4;
+        int endIndex = 6;
+        if (!shortForm) {
+            beginIndex = 6;
+            endIndex = 8;
+        } 
+        String dateDigits = stringForm.substring(beginIndex, endIndex);
+        String realDateDigits = Integer.toString(Integer.parseInt(dateDigits) - 60);
+        return stringForm.substring(0, beginIndex) + realDateDigits;
     }
 
     public static int numberOfDigits(String inNumber) {

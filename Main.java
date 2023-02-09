@@ -1,10 +1,40 @@
 public class Main {
 
     public static void main(String[] args) {
-        testProvidedNumbers();
+        testSamordningsnummer();
+
+        testPersonnummer();
     }
 
-    public static void testProvidedNumbers() {
+    public static void testSamordningsnummer() {
+        String[] validSNs = {
+            "190910799824",
+            "19091079-9824",
+            "0910799824",
+            "091079-9824",
+        };
+
+        String[] invalidSNs = {
+            "190910799825"
+        };
+
+        System.out.println("Testing VALID samordningsnummer:");
+        for (String inNumber : validSNs) {
+            Nummer validatedNummer = validateNummer(inNumber, "s");
+            validatedNummer.printValidity();
+        }
+        System.out.println("------------------------------");
+
+        System.out.println("Testing INVALID samordningsnummer:");
+        for (String inNumber : invalidSNs) {
+            Nummer validatedNummer = validateNummer(inNumber, "s");
+            validatedNummer.printValidity();
+        }
+        System.out.println("------------------------------");
+
+    }
+
+    public static void testPersonnummer() {
         String[] validPNs = {
             "900118+9811", 
             "201701102384", 
@@ -45,12 +75,12 @@ public class Main {
 
     public static Nummer validateNummer(String inNumber, String numberType) {
         Nummer nummer;
-        if (numberType.equalsIgnoreCase("person") || numberType.equalsIgnoreCase("p")) {
+        if (numberType.equalsIgnoreCase("personnummer") || numberType.equalsIgnoreCase("p")) {
             nummer = new Personnummer(inNumber);
-        } else if (numberType.equalsIgnoreCase("organisations") || numberType.equalsIgnoreCase("o")) {
+        } else if (numberType.equalsIgnoreCase("organisationsnummer") || numberType.equalsIgnoreCase("o")) {
             nummer = new Organisationsnummer(inNumber);
-        } else if (numberType.equalsIgnoreCase("sammordnings") || numberType.equalsIgnoreCase("s")) {
-            nummer = new Sammordningsnummer(inNumber);
+        } else if (numberType.equalsIgnoreCase("samordningsnummer") || numberType.equalsIgnoreCase("s")) {
+            nummer = new Samordningsnummer(inNumber);
         } else {
             throw new IllegalArgumentException("Does not recognize numberType, should be \"p\", \"o\" or \"s\".");
         }
