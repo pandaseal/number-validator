@@ -12,18 +12,8 @@ public class PlusUsageCheck extends ValidityCheck {
     }
 
     @Override
-    public String getFailMessage() {
-        return this.nameOfCheck + ": " + this.failMessage;
-    }
-
-    @Override
-    public String getPassMessage() {
-        return this.nameOfCheck + ": " + this.passMessage;
-    }
-
-    @Override
-    public boolean passCheck(Nummer nummer) {
-        return isCorrectUseOfPlus(nummer);
+    public void performCheck(Nummer nummer) {
+        this.pass = isCorrectUseOfPlus(nummer);
     }
 
     public Boolean isCorrectUseOfPlus(Nummer nummer) {

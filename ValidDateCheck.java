@@ -10,18 +10,8 @@ public class ValidDateCheck extends ValidityCheck {
     }
 
     @Override
-    public String getFailMessage() {
-        return this.nameOfCheck + ": " + this.failMessage;
-    }
-
-    @Override
-    public String getPassMessage() {
-        return this.nameOfCheck + ": " + this.passMessage;
-    }
-
-    @Override
-    public boolean passCheck(Nummer nummer) {
-        return isValidDate(nummer);
+    public void performCheck(Nummer nummer) {
+        this.pass = isValidDate(nummer);
     }
 
     public Boolean isValidDate(Nummer nummer) {

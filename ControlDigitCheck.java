@@ -6,18 +6,8 @@ public class ControlDigitCheck extends ValidityCheck {
     }
 
     @Override
-    public String getFailMessage() {
-        return this.nameOfCheck + ": " + this.failMessage;
-    }
-
-    @Override
-    public String getPassMessage() {
-        return this.nameOfCheck + ": " + this.passMessage;
-    }
-
-    @Override
-    public boolean passCheck(Nummer nummer) {
-        return isCorrectControlDigit(nummer);
+    public void performCheck(Nummer nummer) {
+        this.pass = isCorrectControlDigit(nummer);
     }
 
     public Boolean isCorrectControlDigit(Nummer nummer) {
