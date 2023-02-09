@@ -1,9 +1,39 @@
 public class Main {
 
     public static void main(String[] args) {
-        testSamordningsnummer();
+        //testSamordningsnummer();
+        //testPersonnummer();
+        testOrganisationsnummer();
+    }
 
-        testPersonnummer();
+    private static void testNumbers(String message, String numberType, String[] listOfNumbers) {
+        System.out.println(message);
+        for (String inNumber : listOfNumbers) {
+            Nummer validatedNummer = validateNummer(inNumber, numberType);
+            validatedNummer.printValidity();
+        }
+        System.out.println("------------------------------");
+    }
+
+    public static void testOrganisationsnummer() {
+        String[] validONs = {
+            "556614-3185",
+            "16556601-6399",
+            "262000-1111",
+            "857202-7566",
+            "16556614-3185",
+            "16262000-1111",
+            "16857202-7566",
+        };
+        String[] invalidONs = {
+            "17556614-3185",
+            "1816556601-6399",
+            "19262000-1111",
+            "20857202-7566"
+        };
+        testNumbers("Testing VALID organisationsnummer:", "o", validONs);
+        testNumbers("Testing INVALID organisationsnummer:", "o", invalidONs);
+
     }
 
     public static void testSamordningsnummer() {
@@ -13,25 +43,11 @@ public class Main {
             "0910799824",
             "091079-9824",
         };
-
         String[] invalidSNs = {
             "190910799825"
         };
-
-        System.out.println("Testing VALID samordningsnummer:");
-        for (String inNumber : validSNs) {
-            Nummer validatedNummer = validateNummer(inNumber, "s");
-            validatedNummer.printValidity();
-        }
-        System.out.println("------------------------------");
-
-        System.out.println("Testing INVALID samordningsnummer:");
-        for (String inNumber : invalidSNs) {
-            Nummer validatedNummer = validateNummer(inNumber, "s");
-            validatedNummer.printValidity();
-        }
-        System.out.println("------------------------------");
-
+        testNumbers("Testing VALID samordningsnummer:", "s", validSNs);
+        testNumbers("Testing INVALID samordningsnummer:", "s", invalidSNs);
     }
 
     public static void testPersonnummer() {
@@ -52,25 +68,12 @@ public class Main {
             "189102279800",
             "189912299816"
         };
-
         String[] invalidPNs = {
             "201701272394",
             "190302299813"
         };
-
-        System.out.println("Testing VALID personnummers:");
-        for (String inNumber : validPNs) {
-            Nummer validatedNummer = validateNummer(inNumber, "p");
-            validatedNummer.printValidity();
-        }
-        System.out.println("------------------------------");
-
-        System.out.println("Testing INVALID personnummers:");
-        for (String inNumber : invalidPNs) {
-            Nummer validatedNummer = validateNummer(inNumber, "p");
-            validatedNummer.printValidity();
-        }
-        System.out.println("------------------------------");
+        testNumbers("Testing VALID personnummer:", "p", validPNs);
+        testNumbers("Testing INVALID personnummer:", "p", invalidPNs);
     }
 
     public static Nummer validateNummer(String inNumber, String numberType) {
