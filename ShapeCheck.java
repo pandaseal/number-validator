@@ -5,7 +5,7 @@ public class ShapeCheck extends ValidityCheck {
 
     public ShapeCheck() {
         this.nameOfCheck = "ShapeCheck";
-        this.failMessage = "Incorrect shape";
+        this.failMessage = "Wrong shape.";
     }
 
     @Override
