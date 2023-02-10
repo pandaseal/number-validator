@@ -6,7 +6,7 @@ public abstract class Nummer {
     public String numberType;
     public String shapeRegex;
     public Boolean hasCorrectShape;
-    public int numDigits;
+    private int numDigits;
     public ArrayList<ValidityCheck> validityChecks;
     public ArrayList<ValidityCheck> failingChecks;
     public ArrayList<ValidityCheck> passingChecks;
@@ -44,6 +44,65 @@ public abstract class Nummer {
             for (ValidityCheck check : this.failingChecks) {
                 System.out.println(check.getFailMessage());
             }
+        }
+    }
+
+    public int getNumberOfDigits() {
+        if (this.hasCorrectShape == null) {
+            this.hasCorrectShape = ShapeCheck.isCorrectShape(this);
+        }
+        if (!this.hasCorrectShape) {
+            return -2;
+        }
+        if (this.numDigits == 0) {
+            this.numDigits = countNumberOfDigits(this.stringForm);
+        }
+        if (this.numDigits == 0) {
+            System.out.println("numDigits was in fact 0");
+        }
+        return this.numDigits;
+    }
+
+    public int countNumberOfDigits(String inNumber) {
+        int numDigits = 0;
+        for (int i = 0; i < inNumber.length(); i++) {
+            if (Character.isDigit(inNumber.charAt(i)))
+                numDigits++;
+        }
+        return numDigits;
+    }
+
+    public int getMonthDigits() {
+        if (this.hasCorrectShape == null) {
+            this.hasCorrectShape = ShapeCheck.isCorrectShape(this);
+        }
+        if (!this.hasCorrectShape) {
+            return -2;
+        }
+
+        int beginIndex = 0;
+        if (this.getNumberOfDigits() == 12) {
+            beginIndex = 2;   
+        }
+        int endIndex = beginIndex + 2;
+        return Integer.parseInt(this.stringForm.substring(beginIndex, endIndex));
+    }
+
+    public int getYearDigits() {
+        if (this.hasCorrectShape == null) {
+            this.hasCorrectShape = ShapeCheck.isCorrectShape(this);
+        }
+        if (!this.hasCorrectShape) {
+            return -2;
+        }
+
+        if (this.getNumberOfDigits() == 12) {
+            int beginIndex = 0;
+            int endIndex = beginIndex + 2;
+            return Integer.parseInt(this.stringForm.substring(beginIndex, endIndex));
+        } else {
+            /* no year digits to return */
+            return -1;
         }
     }
 }

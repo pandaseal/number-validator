@@ -22,15 +22,14 @@ public class ValidDateCheck extends ValidityCheck {
             this.failMessage = "Wrong shape, cannot check date.";
             return false;
         }
-        if (nummer.numDigits == 0) {
-            nummer.numDigits = numberOfDigits(nummer.stringForm);
-        }
 
-        if (nummer.numDigits == 10) {
+        int numDigits = nummer.getNumberOfDigits();
+
+        if (numDigits == 10) {
             String shortDate;
             String sign = nummer.stringForm.substring(6, 7);
 
-            if (nummer.numberType.equals("samordningsnummer")) {
+            if (nummer.numberType == "samordningsnummer") {
                 shortDate = getRealDate(nummer.stringForm, true);
 
             } else {
@@ -42,7 +41,7 @@ public class ValidDateCheck extends ValidityCheck {
             } else {
                 return shortDateExists(shortDate, false);
             } 
-        } else if (nummer.numDigits == 12) {
+        } else if (numDigits == 12) {
             String longDate;
             if (nummer.numberType == "samordningsnummer") {
                 longDate = getRealDate(nummer.stringForm, false);
@@ -51,7 +50,7 @@ public class ValidDateCheck extends ValidityCheck {
             }
             return longDateExists(longDate);
         } else {
-            this.failMessage = "Wrong shape, cannot check date.";
+            this.failMessage = "Wrong number of digits, cannot check date.";
             return false;        
         }
     }
