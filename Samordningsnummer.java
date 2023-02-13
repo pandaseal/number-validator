@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * Ett samordningsnummer används för människor som inte fått ett personnummer
  * men som ändå behöver identifieras i kontakt med myndigheter. De följer samma
@@ -8,17 +5,13 @@ import java.util.Date;
  * mellan 61 och 91 beroende på vilket datum personen är född).
  */
 public class Samordningsnummer extends Nummer {
-    public Date dateOfBirth;
-
     public Samordningsnummer(String inNumber) {
+        super(inNumber);
         this.numberType = "samordningsnummer";
         this.shapeRegex = "^\\d{6}(?:\\d{2})?[[+][-]]?\\d{4}$";
-        this.validityChecks = new ArrayList<ValidityCheck>();
         this.validityChecks.add(new ShapeCheck());
         this.validityChecks.add(new ControlDigitCheck());
         this.validityChecks.add(new ValidDateCheck());
-        this.validityChecks.add(new PlusUsageCheck());
-        
-        this.stringForm = inNumber;
+        this.validityChecks.add(new PlusUsageCheck());        
     }
 }

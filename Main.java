@@ -3,7 +3,9 @@ public class Main {
     public static void main(String[] args) {
         //testSamordningsnummer();
         //testPersonnummer();
-        testOrganisationsnummer();
+        //testOrganisationsnummer();
+
+        testNumber(" 900118+9811 ", "p");
     }
 
     private static void testNumbers(String message, String numberType, String[] listOfNumbers) {
@@ -95,5 +97,10 @@ public class Main {
     public static Nummer validateNummer(Nummer nummer) {
         nummer.checkValidity();
         return nummer;
+    }
+
+    public static void testNumber(String inNumber, String numberType) {
+        Nummer validatedNummer = validateNummer(inNumber, numberType);
+        validatedNummer.printValidity();
     }
 }

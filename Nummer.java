@@ -11,6 +11,11 @@ public abstract class Nummer {
     public ArrayList<ValidityCheck> failingChecks;
     public ArrayList<ValidityCheck> passingChecks;
 
+    public Nummer(String inNumber) {
+        this.stringForm = inNumber.strip();
+        this.validityChecks = new ArrayList<ValidityCheck>();
+    }
+
     public void checkValidity() {
         this.failingChecks = new ArrayList<ValidityCheck>();
         this.passingChecks = new ArrayList<ValidityCheck>();
