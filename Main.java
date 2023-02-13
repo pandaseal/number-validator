@@ -17,6 +17,11 @@ public class Main {
         System.out.println("------------------------------");
     }
 
+    public static void testNumber(String inNumber, String numberType) {
+        Nummer validatedNummer = validateNummer(inNumber, numberType);
+        validatedNummer.printValidity();
+    }
+
     public static void testOrganisationsnummer() {
         String[] validONs = {
             "556614-3185",
@@ -97,10 +102,5 @@ public class Main {
     public static Nummer validateNummer(Nummer nummer) {
         nummer.checkValidity();
         return nummer;
-    }
-
-    public static void testNumber(String inNumber, String numberType) {
-        Nummer validatedNummer = validateNummer(inNumber, numberType);
-        validatedNummer.printValidity();
     }
 }
