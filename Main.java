@@ -1,14 +1,13 @@
 public class Main {
-    private static boolean consoleMode = false;
 
     public static void main(String[] args) {
-        if (consoleMode) {
-            runFromConsole(args);
-        } else {
+        if (args.length == 0) {
             /* checks example numbers */
             testPersonnummer();
             testOrganisationsnummer();
             testSamordningsnummer();
+        } else {
+            runFromConsole(args);
         }
     }
 
@@ -27,7 +26,6 @@ public class Main {
 
         for (int i = 0; i < args.length; ++i) {
             String param = args[i];
-    
             if (param.equalsIgnoreCase("help") || param.equalsIgnoreCase("h")) {
                 printHelpHint();
                 return;
@@ -51,9 +49,7 @@ public class Main {
             System.err.println("Error: no numberType provided. Run 'java Main help' for instructions.");
             return;
         }
-
-        Nummer validatedNummer = validateNummer(inNumber, numberType);
-        validatedNummer.printValidity(verbose);
+        testNummer(inNumber, numberType, verbose);
     }
 
     private static void printHelpHint() {
@@ -64,29 +60,38 @@ public class Main {
     }
 
     /**
-     * Test the validity of a list of numbers of the same type and make 
-     * a pretty print with the results and failing tests.
+     * Test the validity of a list of numbers of the same type and print results to console.
+     * @param numberType type of number ('p', 'o' or 's')
+     * @param listOfNumbers list of numbers to test
+     * @param verbose if true, print failing tests along with result
+     */
+    public static void testNumbers(String numberType, String[] listOfNumbers, boolean verbose) {
+        for (String inNumber : listOfNumbers) {
+            testNummer(inNumber, numberType, verbose);
+        }
+    }
+    /**
+     * testNumbers() but with "PRETTY PRINTOUT".
      * @param message line to be printed before the results of the tests
      * @param numberType type of number ('p', 'o' or 's')
      * @param listOfNumbers list of numbers to test
+     * @param verbose if true, print failing tests along with result
      */
-    public static void testNumbers(String message, String numberType, String[] listOfNumbers) {
+    public static void testNummers(String message, String numberType, String[] listOfNumbers, boolean verbose) {
         System.out.println(message);
-        for (String inNumber : listOfNumbers) {
-            Nummer validatedNummer = validateNummer(inNumber, numberType);
-            validatedNummer.printValidity(true);
-        }
+        testNumbers(numberType, listOfNumbers, verbose);
         System.out.println("------------------------------");
     }
 
     /**
-     * Test the validity a single nummer and get result and failing tests printed to console.
+     * Test validity of one number, print results to console.
      * @param inNumber number to test
      * @param numberType type of number to test ('p', 'o' or 's')
+     * @param verbose if true, print failing tests along with valid/invalid
      */
-    public static void testNumber(String inNumber, String numberType) {
+    public static void testNummer(String inNumber, String numberType, boolean verbose) {
         Nummer validatedNummer = validateNummer(inNumber, numberType);
-        validatedNummer.printValidity(true);
+        validatedNummer.printValidity(verbose);
     }
 
     /**
@@ -118,8 +123,8 @@ public class Main {
             "19262000-1111",
             "20857202-7566"
         };
-        testNumbers("Testing VALID organisationsnummer:", "o", validONs);
-        testNumbers("Testing INVALID organisationsnummer:", "o", invalidONs);
+        testNummers("Testing VALID organisationsnummer:", "o", validONs, true);
+        testNummers("Testing INVALID organisationsnummer:", "o", invalidONs, true);
 
     }
 
@@ -133,8 +138,8 @@ public class Main {
         String[] invalidSNs = {
             "190910799825"
         };
-        testNumbers("Testing VALID samordningsnummer:", "s", validSNs);
-        testNumbers("Testing INVALID samordningsnummer:", "s", invalidSNs);
+        testNummers("Testing VALID samordningsnummer:", "s", validSNs, true);
+        testNummers("Testing INVALID samordningsnummer:", "s", invalidSNs, true);
     }
 
     public static void testPersonnummer() {
@@ -159,8 +164,8 @@ public class Main {
             "201701272394",
             "190302299813"
         };
-        testNumbers("Testing VALID personnummer:", "p", validPNs);
-        testNumbers("Testing INVALID personnummer:", "p", invalidPNs);
+        testNummers("Testing VALID personnummer:", "p", validPNs, true);
+        testNummers("Testing INVALID personnummer:", "p", invalidPNs, true);
     }
 
     /**
