@@ -107,6 +107,27 @@ public class Main {
         return validatedNummer.isValid;
     }
 
+        /**
+     * Creates a Nummer object and validates it with ValidityChecks corresponding to the passed numberType.
+     * @param inNumber number to test
+     * @param numberType type of number ('p', 'o' or 's')
+     * @return a Nummer object with validation info that can be used however needed
+     */
+    public static Nummer validateNummer(String inNumber, String numberType) {
+        Nummer nummer;
+        if (numberType.equalsIgnoreCase("personnummer") || numberType.equalsIgnoreCase("p")) {
+            nummer = new Personnummer(inNumber);
+        } else if (numberType.equalsIgnoreCase("organisationsnummer") || numberType.equalsIgnoreCase("o")) {
+            nummer = new Organisationsnummer(inNumber);
+        } else if (numberType.equalsIgnoreCase("samordningsnummer") || numberType.equalsIgnoreCase("s")) {
+            nummer = new Samordningsnummer(inNumber);
+        } else {
+            throw new IllegalArgumentException("Does not recognize numberType, should be \"p\", \"o\" or \"s\".");
+        }
+        nummer.checkValidity();
+        return nummer;
+    }
+
     public static void testOrganisationsnummer() {
         String[] validONs = {
             "556614-3185",
@@ -166,26 +187,5 @@ public class Main {
         };
         testNummers("Testing VALID personnummer:", "p", validPNs, true);
         testNummers("Testing INVALID personnummer:", "p", invalidPNs, true);
-    }
-
-    /**
-     * Creates a Nummer object and validates it with ValidityChecks corresponding to the passed numberType.
-     * @param inNumber number to test
-     * @param numberType type of number ('p', 'o' or 's')
-     * @return a Nummer object with validation info that can be used however needed
-     */
-    public static Nummer validateNummer(String inNumber, String numberType) {
-        Nummer nummer;
-        if (numberType.equalsIgnoreCase("personnummer") || numberType.equalsIgnoreCase("p")) {
-            nummer = new Personnummer(inNumber);
-        } else if (numberType.equalsIgnoreCase("organisationsnummer") || numberType.equalsIgnoreCase("o")) {
-            nummer = new Organisationsnummer(inNumber);
-        } else if (numberType.equalsIgnoreCase("samordningsnummer") || numberType.equalsIgnoreCase("s")) {
-            nummer = new Samordningsnummer(inNumber);
-        } else {
-            throw new IllegalArgumentException("Does not recognize numberType, should be \"p\", \"o\" or \"s\".");
-        }
-        nummer.checkValidity();
-        return nummer;
     }
 }
