@@ -38,16 +38,18 @@ public abstract class Nummer {
 
     }
 
-    public void printValidity() {
+    public void printValidity(boolean verbose) {
         if (this.isValid == null) {
             System.out.println("Must run checkValidity() before printing validity.");
         } else if (this.isValid) {
             System.out.println(this.stringForm + " is a valid " + this.numberType);
         } else {
             System.out.println(this.stringForm + " is not a valid " + this.numberType);
-            System.out.println(this.failingChecks.size() + " out of " + this.validityChecks.size() + " ValidityChecks failed:");
-            for (ValidityCheck check : this.failingChecks) {
-                System.out.println(check.getFailMessage());
+            if (verbose) {
+                System.out.println(this.failingChecks.size() + " out of " + this.validityChecks.size() + " ValidityChecks failed:");
+                for (ValidityCheck check : this.failingChecks) {
+                    System.out.println(check.getFailMessage());
+                }
             }
         }
     }
