@@ -1,3 +1,5 @@
+package numbervalidator;
+
 public abstract class ValidityCheck {
     public boolean pass;
     public String nameOfCheck;

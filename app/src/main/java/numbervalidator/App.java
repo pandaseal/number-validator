@@ -1,4 +1,6 @@
-public class Main {
+package numbervalidator;
+
+public class App {
 
     public static void main(String[] args) {
         if (args.length == 0) {

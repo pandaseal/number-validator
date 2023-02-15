@@ -1,3 +1,5 @@
+package numbervalidator;
+
 /**
  * Ett organisationsnummer används för juridiska personer (företag, föreningar,
  * myndigheter osv). Första siffran anger vilken juridisk form organisationen har. Det

@@ -1,3 +1,5 @@
+package numbervalidator;
+
 /**
  * Ett samordningsnummer används för människor som inte fått ett personnummer
  * men som ändå behöver identifieras i kontakt med myndigheter. De följer samma

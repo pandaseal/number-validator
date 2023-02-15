@@ -1,3 +1,5 @@
+package numbervalidator;
+
 public class ControlDigitCheck extends ValidityCheck {
     private static int[] multiplier = {2, 1, 2, 1, 2, 1, 2, 1, 2};
 

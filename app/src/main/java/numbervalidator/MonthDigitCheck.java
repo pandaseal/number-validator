@@ -1,3 +1,5 @@
+package numbervalidator;
+
 public class MonthDigitCheck extends ValidityCheck {
     public MonthDigitCheck() {
         this.nameOfCheck = "MonthDigitCheck";
