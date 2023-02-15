@@ -1,8 +1,9 @@
 # Java: Ignore compiled class files
 *.class
 
-# Mac
+# Mac / my env
 *.DS_Store
+.vscode
 
 # Ignore Gradle project-specific cache directory
 .gradle
