@@ -26,9 +26,13 @@ $ java Main
 > 900118+9811 is a valid personnummer
 > 201701102384 is a valid personnummer
 > ...
+> Testing INVALID organisationsnummer:
+> 17556614-3185 is not a valid organisationsnummer
+> 1 out of 4 ValidityChecks failed:
+> YearDigitCheck: Year digit is not 16.
 ```
 ### Test one number
-Specific numbers can be tested by passing them as agruments to the program. The type of number must be passed as a flag (`p`, `o` or `s`). 
+Specific numbers can be tested by passing them as agruments to the program. The type of number must be passed as an argument (`p`, `o` or `s`). 
 ```
 $ java Main 900118+9811 p
 > 900118+9811 is a valid personnummer
@@ -38,4 +42,15 @@ $ java Main 556614-3185 o
 
 $ java Main s 190910799824
 > 190910799824 is a valid samordningsnummer
+
+$ java Main 17556614-3185 o
+> 17556614-3185 is not a valid organisationsnummer
+```
+
+If you want to see what tests failed, pass the argument `v` or `verbose`.
+```
+$ java Main 17556614-3185 o v
+> 17556614-3185 is not a valid organisationsnummer
+> 1 out of 4 ValidityChecks failed:
+> YearDigitCheck: Year digit is not 16.
 ```
