@@ -1,5 +1,10 @@
 package numbervalidator;
 
+/**
+ * This ValidityCheck is used to check Nummer of type Organisationsnummer. 
+ * For an Organisationsnummer, the "month digits" (those that would represent
+ * the month in the DOB of a personnummer) needs to be >= 20. 
+ */
 public class MonthDigitCheck extends ValidityCheck {
     public MonthDigitCheck() {
         this.nameOfCheck = "MonthDigitCheck";
