@@ -1,14 +1,12 @@
 package numbervalidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
 public class ControlDigitCheckTest {
 
     @Test 
     void checkValidPNs() {
-        // actually valid PNs
         String[] validPNs = {
             "900118+9811", 
             "201701102384", 
@@ -34,7 +32,6 @@ public class ControlDigitCheckTest {
 
     @Test 
     void checkValidONs() {
-        // actually valid PNs
         String[] validONs = {
             "556614-3185",
             "16556601-6399",
@@ -53,7 +50,6 @@ public class ControlDigitCheckTest {
 
     @Test 
     void checkValidSNs() {
-        // actually valid PNs
         String[] validSNs = {
             "190910799824",
             "19091079-9824",
@@ -96,7 +92,6 @@ public class ControlDigitCheckTest {
 
     @Test 
     void checkONsWithWrongControlDigits() {
-        // valid PNs with control digit changed
         String[] testNumbers = {
             "556614-3186",
             "16556601-6390",
