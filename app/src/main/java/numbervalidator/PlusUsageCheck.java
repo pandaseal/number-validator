@@ -28,7 +28,7 @@ public class PlusUsageCheck extends ValidityCheck {
         }
 
         if (hasPlusAnd8digits(nummer)) {
-            return isHundredPlus(nummer);
+            return has12DigitsAndIsHundredPlus(nummer);
         }
         this.passMessage = "No plus in number to be used wrongly.";
         return true;
@@ -45,10 +45,20 @@ public class PlusUsageCheck extends ValidityCheck {
         return matchFound;
     }
 
-    public Boolean isHundredPlus(Nummer nummer) {
+    public Boolean has12DigitsAndIsHundredPlus(Nummer nummer) {
+        if (nummer.hasCorrectShape == null) {
+            nummer.hasCorrectShape = ShapeCheck.isCorrectShape(nummer);
+        }
+        if (!nummer.hasCorrectShape) {
+            this.failMessage = "Wrong shape, cannot check age.";
+            return false;
+        }
+        if (nummer.getNumberOfDigits() != 12) {
+            this.failMessage = "Wrong number of digits, cannot check age.";
+            return false;
+        }
 
-        String[] sArr = nummer.stringForm.split("[+]");
-        String dateOfBirth = sArr[0];
+        String dateOfBirth = nummer.getDateOfBirth();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Calendar cal = Calendar.getInstance();
