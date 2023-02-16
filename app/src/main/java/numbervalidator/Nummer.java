@@ -105,12 +105,26 @@ public abstract class Nummer {
         }
 
         if (this.getNumberOfDigits() == 12) {
-            int beginIndex = 0;
-            int endIndex = beginIndex + 2;
-            return Integer.parseInt(this.stringForm.substring(beginIndex, endIndex));
+            return Integer.parseInt(this.stringForm.substring(0, 2));
         } else {
             /* no year digits to return */
             return -1;
+        }
+    }
+
+    public String getDateOfBirth() {
+        if (this.hasCorrectShape == null) {
+            this.hasCorrectShape = ShapeCheck.isCorrectShape(this);
+        }
+        if (!this.hasCorrectShape) {
+            return "";
+        }
+
+        if (this.getNumberOfDigits() == 10) {
+            return this.stringForm.substring(0, 6);
+        } else {
+            return this.stringForm.substring(0, 8);
+            
         }
     }
 }
