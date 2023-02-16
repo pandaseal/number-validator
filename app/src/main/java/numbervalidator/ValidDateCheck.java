@@ -16,6 +16,11 @@ public class ValidDateCheck extends ValidityCheck {
         this.pass = isValidDate(nummer);
     }
 
+    /**
+     * TODO rewrite to make use of Nummer.getDateOfBirth()
+     * @param nummer 
+     * @return true if date of birth exists, else false
+     */
     public Boolean isValidDate(Nummer nummer) {
         if (nummer.hasCorrectShape == null) {
             nummer.hasCorrectShape = ShapeCheck.isCorrectShape(nummer);
@@ -74,15 +79,6 @@ public class ValidDateCheck extends ValidityCheck {
         String dateDigits = stringForm.substring(beginIndex, endIndex);
         String realDateDigits = Integer.toString(Integer.parseInt(dateDigits) - 60);
         return stringForm.substring(0, beginIndex) + realDateDigits;
-    }
-
-    public static int numberOfDigits(String inNumber) {
-        int numDigits = 0;
-        for (int i = 0; i < inNumber.length(); i++) {
-            if (Character.isDigit(inNumber.charAt(i)))
-                numDigits++;
-        }
-        return numDigits;
     }
 
     public static Boolean longDateExists(String longDate) {
