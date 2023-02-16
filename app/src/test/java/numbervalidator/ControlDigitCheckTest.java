@@ -1,66 +1,50 @@
 package numbervalidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 public class ControlDigitCheckTest {
 
     @Test 
     void checkValidPNs() {
-        String[] validPNs = {
-            "900118+9811", 
-            "201701102384", 
-            "141206-2380", 
-            "20080903-2386",
-            "7101169295",
-            "198107249289",
-            "19021214-9819",
-            "190910199827",
-            "191006089807",
-            "192109099180",
-            "4607137454",
-            "194510168885",
-            "189102279800",
-            "189912299816"
-        };
-        for (String validPNstr : validPNs) {
-            ControlDigitCheck check = new ControlDigitCheck();
-            Nummer validPN = new Personnummer(validPNstr);
-            assertEquals(true, check.isCorrectControlDigit(validPN));
-        }
+        ControlDigitCheck check = new ControlDigitCheck();
+        assertTrue(check.isCorrectControlDigit(new Personnummer("900118+9811")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("201701102384")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("141206-2380")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("20080903-2386")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("7101169295")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("198107249289")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("19021214-9819")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("190910199827")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("191006089807")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("192109099180")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("4607137454")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("194510168885")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("189102279800")));
+        assertTrue(check.isCorrectControlDigit(new Personnummer("189912299816")));
     }
 
     @Test 
     void checkValidONs() {
-        String[] validONs = {
-            "556614-3185",
-            "16556601-6399",
-            "262000-1111",
-            "857202-7566",
-            "16556614-3185",
-            "16262000-1111",
-            "16857202-7566",
-        };
-        for (String validONstr : validONs) {
-            ControlDigitCheck check = new ControlDigitCheck();
-            Nummer validON = new Organisationsnummer(validONstr);
-            assertEquals(true, check.isCorrectControlDigit(validON));
-        }
+        ControlDigitCheck check = new ControlDigitCheck();
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("556614-3185")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("16556601-6399")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("262000-1111")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("857202-7566")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("16556614-3185")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("16262000-1111")));
+        assertTrue(check.isCorrectControlDigit(new Organisationsnummer("16857202-7566")));
     }
 
     @Test 
     void checkValidSNs() {
-        String[] validSNs = {
-            "190910799824",
-            "19091079-9824",
-            "0910799824",
-            "091079-9824",
-        };
-        for (String validSNstr : validSNs) {
-            ControlDigitCheck check = new ControlDigitCheck();
-            Nummer validSN = new Organisationsnummer(validSNstr);
-            assertEquals(true, check.isCorrectControlDigit(validSN));
-        }
+        ControlDigitCheck check = new ControlDigitCheck();
+        assertTrue(check.isCorrectControlDigit(new Samordningsnummer("190910799824")));
+        assertTrue(check.isCorrectControlDigit(new Samordningsnummer("19091079-9824")));
+        assertTrue(check.isCorrectControlDigit(new Samordningsnummer("0910799824")));
+        assertTrue(check.isCorrectControlDigit(new Samordningsnummer("091079-9824")));
     }
     
     @Test 
