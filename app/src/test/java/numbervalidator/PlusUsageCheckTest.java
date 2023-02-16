@@ -10,28 +10,6 @@ import org.junit.jupiter.api.Test;
  * Nummer of type Personnummer and Samordningsnummer.
  */
 public class PlusUsageCheckTest {
-    String[] validPNs = {
-        "900118+9811", 
-        "201701102384", 
-        "141206-2380", 
-        "20080903-2386",
-        "7101169295",
-        "198107249289",
-        "19021214-9819",
-        "190910199827",
-        "191006089807",
-        "192109099180",
-        "4607137454",
-        "194510168885",
-        "189102279800",
-        "189912299816"
-    };
-    String[] validSNs = {
-        "190910799824",
-        "19091079-9824",
-        "0910799824",
-        "091079-9824",
-    };
     @Test 
     void checkValidPNs() {
         PlusUsageCheck check = new PlusUsageCheck();
