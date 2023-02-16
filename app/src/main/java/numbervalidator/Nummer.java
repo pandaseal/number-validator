@@ -71,7 +71,7 @@ public abstract class Nummer {
         return this.numDigits;
     }
 
-    public int countNumberOfDigits(String inNumber) {
+    public static int countNumberOfDigits(String inNumber) {
         int numDigits = 0;
         for (int i = 0; i < inNumber.length(); i++) {
             if (Character.isDigit(inNumber.charAt(i)))
@@ -88,9 +88,9 @@ public abstract class Nummer {
             return -2;
         }
 
-        int beginIndex = 0;
+        int beginIndex = 2;
         if (this.getNumberOfDigits() == 12) {
-            beginIndex = 2;   
+            beginIndex = 4;   
         }
         int endIndex = beginIndex + 2;
         return Integer.parseInt(this.stringForm.substring(beginIndex, endIndex));
