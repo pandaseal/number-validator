@@ -1,9 +1,9 @@
 package numbervalidator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -52,18 +52,27 @@ public class ValidDateCheckTest {
         /* Lack of examples of Samordningsnummer. */
     }
 
-    /* The following tests are disabled until someone has the time to implement them
-     * Until then, the above tests will do (they check the overall function).
-     */
-    @Disabled
     @Test
-    void getRealDateTest() {}
+    void getRealDateTest() {
+        assertEquals("19091019", ValidDateCheck.getRealDate("19091079"));
+        assertEquals("091019", ValidDateCheck.getRealDate("091079"));
+        assertEquals("", ValidDateCheck.getRealDate(""));
+    }
 
-    @Disabled
     @Test
-    void longDateExistsTest() {}
+    void dateExistsTest() {
+        assertTrue(ValidDateCheck.dateExists("20230217", false));
+        assertTrue(ValidDateCheck.dateExists("230217", false));
+        assertTrue(ValidDateCheck.dateExists("900118", true));
+        
+        assertFalse(ValidDateCheck.dateExists("230229", false));
+        assertFalse(ValidDateCheck.dateExists("19030229", false));
+        assertFalse(ValidDateCheck.dateExists("", false));
+        assertFalse(ValidDateCheck.dateExists("7", false));
+        
+        /* Special case: 2000 is a leap year, but 1900 is not */
+        assertTrue(ValidDateCheck.dateExists("000229", false));
+        assertFalse(ValidDateCheck.dateExists("000229", true));
+    }
 
-    @Disabled
-    @Test
-    void shortDateExistsTest() {}
 }

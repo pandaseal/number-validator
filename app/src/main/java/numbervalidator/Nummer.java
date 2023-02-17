@@ -7,10 +7,12 @@ public abstract class Nummer {
     public String numberType;
     public String shapeRegex;
     public Boolean hasCorrectShape;
-    private int numDigits;
     public ArrayList<ValidityCheck> validityChecks;
     public ArrayList<ValidityCheck> failingChecks;
     public ArrayList<ValidityCheck> passingChecks;
+    
+    private int numDigits;
+    private String dateOfBirthDigits;
 
     public Nummer(String inNumber) {
         this.stringForm = inNumber.strip();
@@ -112,7 +114,11 @@ public abstract class Nummer {
         }
     }
 
-    public String getDateOfBirth() {
+    public String getDateOfBirthDigits() {
+        if (this.dateOfBirthDigits != null) {
+            return this.dateOfBirthDigits;
+        }
+        
         if (this.hasCorrectShape == null) {
             this.hasCorrectShape = ShapeCheck.isCorrectShape(this);
         }

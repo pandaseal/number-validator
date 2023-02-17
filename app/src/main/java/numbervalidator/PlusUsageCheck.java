@@ -58,7 +58,7 @@ public class PlusUsageCheck extends ValidityCheck {
             return false;
         }
 
-        String dateOfBirth = nummer.getDateOfBirth();
+        String dateOfBirth = nummer.getDateOfBirthDigits();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Calendar cal = Calendar.getInstance();

@@ -190,30 +190,30 @@ public class NummerTest {
 
     @Test
     void getDateOfBirthPNTest() {
-        assertEquals("900118", new Personnummer("900118+9811").getDateOfBirth());
-        assertEquals("460713", new Personnummer("4607137454").getDateOfBirth());
-        assertEquals("20170110", new Personnummer("201701102384").getDateOfBirth());
-        assertEquals("20080903", new Personnummer("20080903-2386").getDateOfBirth());
-        assertEquals("", new Personnummer("0080903-2386").getDateOfBirth());
-        assertEquals("", new Personnummer("").getDateOfBirth());
+        assertEquals("900118", new Personnummer("900118+9811").getDateOfBirthDigits());
+        assertEquals("460713", new Personnummer("4607137454").getDateOfBirthDigits());
+        assertEquals("20170110", new Personnummer("201701102384").getDateOfBirthDigits());
+        assertEquals("20080903", new Personnummer("20080903-2386").getDateOfBirthDigits());
+        assertEquals("", new Personnummer("0080903-2386").getDateOfBirthDigits());
+        assertEquals("", new Personnummer("").getDateOfBirthDigits());
     }
 
     @Test
     void getDateOfBirthONTest() {
-        assertEquals("556614", new Organisationsnummer("556614-3185").getDateOfBirth());
-        assertEquals("16556601", new Organisationsnummer("16556601-6399").getDateOfBirth());
-        assertEquals("", new Organisationsnummer("116556601-6399").getDateOfBirth());
-        assertEquals("", new Organisationsnummer("").getDateOfBirth());
+        assertEquals("556614", new Organisationsnummer("556614-3185").getDateOfBirthDigits());
+        assertEquals("16556601", new Organisationsnummer("16556601-6399").getDateOfBirthDigits());
+        assertEquals("", new Organisationsnummer("116556601-6399").getDateOfBirthDigits());
+        assertEquals("", new Organisationsnummer("").getDateOfBirthDigits());
     }
 
     @Test
     void getDateOfBirthSNTest() {
-        assertEquals("091079", new Samordningsnummer("091079-9824").getDateOfBirth());
-        assertEquals("091079", new Samordningsnummer("0910799824").getDateOfBirth());
-        assertEquals("19091079", new Samordningsnummer("19091079-9824").getDateOfBirth());
-        assertEquals("19091079", new Samordningsnummer("190910799824").getDateOfBirth());
-        assertEquals("", new Samordningsnummer("19091079982").getDateOfBirth());
-        assertEquals("", new Samordningsnummer("190910799").getDateOfBirth());
-        assertEquals("", new Samordningsnummer("").getDateOfBirth());
+        assertEquals("091079", new Samordningsnummer("091079-9824").getDateOfBirthDigits());
+        assertEquals("091079", new Samordningsnummer("0910799824").getDateOfBirthDigits());
+        assertEquals("19091079", new Samordningsnummer("19091079-9824").getDateOfBirthDigits());
+        assertEquals("19091079", new Samordningsnummer("190910799824").getDateOfBirthDigits());
+        assertEquals("", new Samordningsnummer("19091079982").getDateOfBirthDigits());
+        assertEquals("", new Samordningsnummer("190910799").getDateOfBirthDigits());
+        assertEquals("", new Samordningsnummer("").getDateOfBirthDigits());
     }
 }
