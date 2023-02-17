@@ -67,7 +67,7 @@ public class App {
      * @param listOfNumbers list of numbers to test
      * @param verbose if true, print failing tests along with result
      */
-    public static void testNumbers(String numberType, String[] listOfNumbers, boolean verbose) {
+    public static void testNummers(String numberType, String[] listOfNumbers, boolean verbose) {
         for (String inNumber : listOfNumbers) {
             testNummer(inNumber, numberType, verbose);
         }
@@ -81,7 +81,7 @@ public class App {
      */
     public static void testNummers(String message, String numberType, String[] listOfNumbers, boolean verbose) {
         System.out.println(message);
-        testNumbers(numberType, listOfNumbers, verbose);
+        testNummers(numberType, listOfNumbers, verbose);
         System.out.println("------------------------------");
     }
 
@@ -109,7 +109,7 @@ public class App {
         return validatedNummer.isValid;
     }
 
-        /**
+    /**
      * Creates a Nummer object and validates it with ValidityChecks corresponding to the passed numberType.
      * @param inNumber number to test
      * @param numberType type of number ('p', 'o' or 's')
