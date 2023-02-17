@@ -1,28 +1,30 @@
 # Number Validator - Code Assignment
 
-This is my solution to a code assignment. The task was to write a program that tests the validity of Swedish personal numbers (social security numbers) and two other types of "governmental numbers" - organisationsnummer and samordningsnummer. The program is written in Java and structured in an Object Oriented manner. 
+This is my solution to a code assignment. The task was to write a program that tests the validity of Swedish personnummer (social security numbers) and two other types of "governmental numbers" - organisationsnummer and samordningsnummer. The program is written in Java and structured in an Object Oriented manner. 
 
-The numbers come to the program as strings and the program tests their validity according to the defined specifications for the number type. The program can also show the results of testing a bunch of example numbers that were provided in the instructions (none of them are real numbers).
+The program is adapted for demo purposes but the code could also be used as part of something bigger. The basic idea is: To validate a nummer, create a `Nummer` object of corresponding type and pass the number to be validated as a string to the constructor, then `checkValidity()`, which will update the `isValid` and `failingTests` fields of the Nummer object. These fields can then be accessed to make pretty printouts/logging or whatever one needs them for.
 
 ## Dependencies
 - Java 19
 
-## Build and run
+## Build
 - The project uses Gradle for build and running (build with Gradle 8.0)
 - The `gradlew` script ensures that the right version is used and because of it you don't need to have gradle installed to run the project. 
-- To build and run the project, just use the following command, while in the project folder. 
-- The program has two modes (see info below): 
-  1) testing the example numbers (provided in instructions, hard coded)
-  2) testing a single number passed as an argument
+- To build the project, just use the following command, while in the project folder. 
 
 On Windows:
 ```
-$ gradlew run
+$ gradlew.bat build
 ```
 On Linux/Mac:
 ```
-$ ./gradlew run
+$ ./gradlew build
 ```
+
+## Run
+The program has two modes: 
+  1) testing example numbers - pass no arguments
+  2) testing a single number - pass number to test as argument
 
 ### Mode 1: Test example numbers
 With no arguments, the program tests example numbers from all three classes of numbers 
@@ -39,7 +41,7 @@ $ ./gradlew run
 > YearDigitCheck: Year digit is not 16.
 ```
 ### Mode 2: Test one number
-Specific numbers can be tested by passing them as agruments to the program. The type of number must be passed as an argument (`p`, `o` or `s`). 
+Specific numbers can be tested by passing them as arguments to the program. The type of number must be passed as an argument (`p`, `o` or `s`). 
 ```
 $ ./gradlew run --args="900118+9811 p"
 > 900118+9811 is a valid personnummer
@@ -60,4 +62,10 @@ $ ./gradlew run --args="17556614-3185 o v"
 > 17556614-3185 is not a valid organisationsnummer
 > 1 out of 4 ValidityChecks failed:
 > YearDigitCheck: Year digit is not 16.
+```
+
+## Unit tests
+The project is tested with JUnit Jupiter tests. To execute the tests run:
+```
+$ ./gradlew test
 ```
