@@ -7,17 +7,17 @@ The program is adapted for demo purposes (see "Run" section) but the code could 
 - Java 19
 
 ## Build
-- The project uses Gradle for build and running (build with Gradle 8.0)
+- The project uses Gradle for build and running (built with Gradle 8.0)
 - The `gradlew` script ensures that the right version is used and because of it you don't need to have gradle installed to run the project. 
-- To build the project, just use the following command, while in the project folder. 
+- To build and run the project, just use the following command, while in the project folder.
 
 On Windows:
 ```
-$ gradlew.bat build
+$ gradlew.bat run
 ```
 On Linux/Mac:
 ```
-$ ./gradlew build
+$ ./gradlew run
 ```
 
 ## Run
